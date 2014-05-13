@@ -1,0 +1,4 @@
+sandbox
+.vagrant
+.DS_Store
+najem_ssh*
