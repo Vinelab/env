@@ -1,0 +1,20 @@
+---
+- name: site
+  skip: no # whether Vagrant should include it or not, set to yes for Vagrant to skip it
+  sync: # directories to sync from Host (your machine) to guest (Vagrant)
+      - host: /Users/Mulkave/Developer/Vinelab/Products/agency/code
+        guest: /home/vagrant/agency
+  docker: # Docker configuration
+      name: vinelab-agency # Container name
+      hostname: agency-develop # the hostname of the container
+      image: vinelab/agency # The image to build
+      volumes: # Configure the volumes that Docker should know about
+      - host: /home/vagrant/agency # Vagrant location (synced as guest in the 'sync:' section)
+        guest: /var/www/agency # Location in the container
+      ports: # Configure the ports you expect docker to listen to, the 'host' part will be mapped from Vagrant to the guest (Docker)
+        - { host: 7000, guest: 80 } # web
+        - { host: 7001, guest: 22 } # ssh
+        - { host: 7002, guest: 6379 } # redis
+        - { host: 7003, guest: 3306 } # mysql
+        - { host: 7004, guest: 27017 } # mongodb
+        - { host: 7005, guest: 9001 } # supervisord
